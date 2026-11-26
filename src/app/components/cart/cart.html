@@ -1,0 +1,67 @@
+<div class="breadcrumb">
+  <a routerLink="/">Trang chủ</a> &gt; <span>Giỏ hàng</span>
+</div>
+
+<div class="cart-container">
+  <h2>🛒 Giỏ hàng của bạn</h2>
+
+  @if (cart.error()) {
+    <p class="form-status" role="alert">{{ cart.error() }}</p>
+  }
+
+  @if (cart.items().length > 0) {
+    <div class="cart-items">
+      @for (item of cart.items(); track item.product.slug) {
+        <article class="cart-item">
+          <img [src]="item.product.image" [alt]="item.product.name">
+          <div class="item-info">
+            <h3>{{ item.product.name }}</h3>
+            <div class="item-price">{{ formatPrice(cart.unitPrice(item.product)) }}</div>
+            <div class="quantity-control">
+              <button
+                type="button"
+                [disabled]="item.quantity <= 1"
+                [attr.aria-label]="'Giảm số lượng ' + item.product.name"
+                (click)="cart.setQuantity(item.product.slug, item.quantity - 1)">−</button>
+              <span>Số lượng: {{ item.quantity }}</span>
+              <button
+                type="button"
+                [attr.aria-label]="'Tăng số lượng ' + item.product.name"
+                (click)="cart.setQuantity(item.product.slug, item.quantity + 1)">+</button>
+              <button
+                type="button"
+                class="remove-item"
+                [attr.aria-label]="'Xóa ' + item.product.name + ' khỏi giỏ'"
+                (click)="cart.remove(item.product.slug)">Xóa</button>
+            </div>
+          </div>
+          <strong class="line-total">{{ formatPrice(cart.itemTotal(item)) }}</strong>
+        </article>
+      }
+    </div>
+
+    <div class="cart-summary">
+      <div class="row">
+        <span>Tạm tính</span>
+        <span>{{ formatPrice(cart.subtotal()) }}</span>
+      </div>
+      <div class="row">
+        <span>Phí vận chuyển</span>
+        <span class="free">Miễn phí</span>
+      </div>
+      <div class="total-row">
+        <span>Tổng cộng</span>
+        <span class="total-price">{{ formatPrice(cart.subtotal()) }}</span>
+      </div>
+
+      <a routerLink="/checkout" class="btn-checkout">Đặt hàng (COD)</a>
+      <a routerLink="/products" class="btn-continue">← Tiếp tục mua sắm</a>
+    </div>
+  } @else {
+    <div class="empty-cart">
+      <p>Giỏ hàng đang trống.</p>
+      <a routerLink="/products" class="btn-continue">Khám phá sản phẩm →</a>
+    </div>
+  }
+</div>
+

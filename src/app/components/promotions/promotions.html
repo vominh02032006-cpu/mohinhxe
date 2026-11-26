@@ -1,0 +1,42 @@
+<div class="breadcrumb">
+  <a routerLink="/">Trang chủ</a> &gt; <span>Sản phẩm khuyến mãi</span>
+</div>
+
+<section class="page-heading">
+  <span class="eyebrow">ƯU ĐÃI CÓ HẠN</span>
+  <h1>🏎️ Mô hình xe đang ưu đãi</h1>
+  <p>Săn những mẫu siêu xe mô hình với mức giá ưu đãi dành cho dân sưu tầm.</p>
+</section>
+
+<section class="products-section">
+  <div class="products-heading">
+    <h2>Xe mô hình đang giảm giá</h2>
+    <span class="product-count">{{ saleProducts().length }} sản phẩm</span>
+  </div>
+
+  @if (error()) {
+    <p class="form-status" role="alert">{{ error() }}</p>
+  }
+
+  <div class="product-grid">
+    @for (product of saleProducts(); track product.slug) {
+    <article class="product-card">
+      <div class="product-image">
+        <img [src]="product.image" [alt]="product.name">
+        <span class="label label-sale">-{{ product.discount }}%</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <div class="price">{{ product.price }}</div>
+        <div class="old-price">{{ product.oldPrice }}</div>
+        <div class="product-actions">
+          <a routerLink="/cart" class="btn-buy" (click)="cart.add(product)">🛒 Mua</a>
+          <a [routerLink]="['/product', product.slug]" class="btn-detail">Chi tiết</a>
+        </div>
+      </div>
+    </article>
+    } @empty {
+    <p class="empty-state">Hiện chưa có sản phẩm khuyến mãi.</p>
+    }
+  </div>
+</section>

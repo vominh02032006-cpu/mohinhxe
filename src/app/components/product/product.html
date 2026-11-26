@@ -1,0 +1,56 @@
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a routerLink="/">Trang chủ</a> &gt; <a routerLink="/products">Sản phẩm</a> &gt; <span>Chi tiết</span>
+</div>
+
+@if (error()) {
+  <p class="form-status" role="alert">{{ error() }}</p>
+}
+
+@if (product(); as item) {
+<article class="product-detail">
+  <!-- IMAGE -->
+  <div class="detail-image">
+    <img [src]="item.image" [alt]="item.name">
+    @if (item.discount === 0) {
+      <span class="label label-new">NEW</span>
+    } @else {
+      <span class="label label-sale">-{{ item.discount }}%</span>
+    }
+  </div>
+
+  <!-- CONTENT -->
+  <div class="detail-info">
+    <h1 class="detail-title">{{ item.name }}</h1>
+    
+    <div class="detail-price-box">
+      <span class="price">{{ item.price }}</span>
+      @if (item.oldPrice !== '-') {
+        <span class="old-price">{{ item.oldPrice }}</span>
+      }
+      @if (item.discount > 0) {
+        <span class="discount-badge">-{{ item.discount }}%</span>
+      }
+    </div>
+
+    <p class="detail-desc">
+      {{ item.description || 'Mô hình sưu tầm với thiết kế chi tiết, phù hợp trưng bày hoặc làm quà tặng cho người mê xe.' }}
+    </p>
+
+    <div class="detail-features">
+      <div class="item">🏎️ Thiết kế mô phỏng chi tiết xe thật</div>
+      <div class="item">✨ Nước sơn đẹp, hộp trưng bày chỉn chu</div>
+      <div class="item">📦 Đóng gói chống sốc khi giao hàng</div>
+    </div>
+
+    <div class="detail-actions">
+      <a routerLink="/cart" class="btn-cart" (click)="cart.add(item)">🛒 Thêm vào giỏ</a>
+      <a routerLink="/cart" class="btn-buy-now" (click)="cart.add(item)">Mua ngay</a>
+    </div>
+
+    <div class="back-link">
+      <a routerLink="/products">← Xem thêm mô hình xe</a>
+    </div>
+  </div>
+</article>
+}

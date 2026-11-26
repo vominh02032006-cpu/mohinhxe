@@ -1,0 +1,215 @@
+<section class="admin-page">
+  @if (checkingSession()) {
+    <div class="admin-card loading-card">Đang kiểm tra đăng nhập...</div>
+  } @else if (!authenticated()) {
+    <form class="login-card" (ngSubmit)="login()">
+      <a class="back-link" routerLink="/">← Về trang bán hàng</a>
+      <div class="admin-brand">BH Garage <span>ADMIN</span></div>
+      <h1>Đăng nhập quản trị</h1>
+      <p>Đăng nhập để quản lý sản phẩm, danh mục, bài viết và banner.</p>
+
+      @if (error()) {
+        <p class="status error" role="alert">{{ error() }}</p>
+      }
+      @if (notice()) {
+        <p class="status success" role="status">{{ notice() }}</p>
+      }
+
+      <label>
+        Tên đăng nhập
+        <input
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          autocomplete="username"
+          required>
+      </label>
+      <label>
+        Mật khẩu
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          autocomplete="current-password"
+          required>
+      </label>
+      <button class="primary-button login-button" type="submit" [disabled]="loginPending()">
+        {{ loginPending() ? 'Đang đăng nhập...' : 'Đăng nhập' }}
+      </button>
+    </form>
+  } @else {
+    <div class="admin-header">
+      <div>
+        <a class="back-link" routerLink="/">← Về trang bán hàng</a>
+        <div class="admin-brand">BH Garage <span>ADMIN</span></div>
+        <h1>Quản trị nội dung</h1>
+      </div>
+      <button class="secondary-button" type="button" (click)="logout()">Đăng xuất</button>
+    </div>
+
+    <nav class="collection-tabs" aria-label="Loại nội dung">
+      @for (collection of collections; track collection.key) {
+        <button
+          type="button"
+          [class.active]="selectedCollection() === collection.key"
+          (click)="selectCollection(collection.key)">
+          {{ collection.label }}
+        </button>
+      }
+      <button
+        type="button"
+        [class.active]="showOrders()"
+        (click)="selectOrders()">
+        Đơn hàng
+      </button>
+    </nav>
+
+    @if (error()) {
+      <p class="status error" role="alert">{{ error() }}</p>
+    }
+    @if (notice()) {
+      <p class="status success" role="status">{{ notice() }}</p>
+    }
+
+    @if (showOrders()) {
+      <section class="orders-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Danh sách đơn hàng</h2>
+            <p>{{ orders().length }} đơn</p>
+          </div>
+          <button class="secondary-button" type="button" (click)="selectOrders()">Tải lại</button>
+        </div>
+        @if (loading()) {
+          <p class="empty-message">Đang tải đơn hàng...</p>
+        } @else if (orders().length === 0) {
+          <p class="empty-message">Chưa có đơn hàng.</p>
+        } @else {
+          <div class="admin-order-list">
+            @for (order of orders(); track order.id) {
+              <article class="admin-order">
+                <header class="order-heading">
+                  <div>
+                    <strong>Đơn #{{ order.id.slice(0, 8) }} · {{ order.customer.name }}</strong>
+                    <small>{{ order.createdAt | date:'medium' }} · {{ order.customer.phone }}</small>
+                  </div>
+                  <strong class="order-total">{{ order.total | number }}đ</strong>
+                </header>
+                <p class="order-address">{{ order.customer.address }}</p>
+                <div class="admin-order-items">
+                  @for (item of order.items; track item.productSlug) {
+                    <span>{{ item.name }} × {{ item.quantity }} — {{ item.lineTotal | number }}đ</span>
+                  }
+                </div>
+                @if (order.note) {
+                  <p class="order-address">Ghi chú: {{ order.note }}</p>
+                }
+                <label class="status-control">
+                  Trạng thái
+                  <select [value]="order.status" (change)="updateOrderStatus(order, $event)">
+                    <option value="pending">Chờ xác nhận</option>
+                    <option value="confirmed">Đã xác nhận</option>
+                    <option value="shipping">Đang giao</option>
+                    <option value="delivered">Đã giao</option>
+                    <option value="cancelled">Đã hủy</option>
+                  </select>
+                </label>
+              </article>
+            }
+          </div>
+        }
+      </section>
+    } @else {
+    <div class="admin-content">
+      <section class="records-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>{{ currentConfig().label }}</h2>
+            <p>{{ items().length }} mục</p>
+          </div>
+          <button class="primary-button" type="button" (click)="startCreate()">+ Thêm mới</button>
+        </div>
+
+        @if (loading()) {
+          <p class="empty-message">Đang tải dữ liệu...</p>
+        } @else if (items().length === 0) {
+          <p class="empty-message">Chưa có nội dung. Hãy thêm mục đầu tiên.</p>
+        } @else {
+          <div class="record-list">
+            @for (item of items(); track item.slug) {
+              <article class="record">
+                <div class="record-copy">
+                  <strong>{{ item[currentConfig().titleKey] || item.slug }}</strong>
+                  <small>{{ item.slug }}</small>
+                </div>
+                <div class="record-actions">
+                  <button class="secondary-button" type="button" (click)="edit(item)">Sửa</button>
+                  <button class="danger-button" type="button" (click)="delete(item)">Xóa</button>
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </section>
+
+      <form class="editor-panel" (ngSubmit)="save()">
+        <div class="panel-heading">
+          <div>
+            <h2>{{ editingSlug() ? 'Chỉnh sửa' : 'Thêm mới' }}</h2>
+            <p>{{ currentConfig().label }}</p>
+          </div>
+          @if (editingSlug()) {
+            <button class="text-button" type="button" (click)="cancelEdit()">Hủy</button>
+          }
+        </div>
+
+        @for (field of fields(); track field.key) {
+          @if (field.type === 'textarea') {
+            <label class="field">
+              {{ field.label }}
+              <textarea
+                [name]="field.key"
+                [(ngModel)]="draft[field.key]"
+                [required]="field.required ?? false"
+                rows="4"></textarea>
+            </label>
+          } @else if (field.type === 'checkbox') {
+            <label class="checkbox-field">
+              <input type="checkbox" [name]="field.key" [(ngModel)]="draft[field.key]">
+              {{ field.label }}
+            </label>
+          } @else if (field.type === 'category-select') {
+            <label class="field">
+              {{ field.label }}
+              <select
+                [name]="field.key"
+                [(ngModel)]="draft[field.key]"
+                [required]="field.required ?? false">
+                <option value="">Chọn danh mục</option>
+                @for (category of categories(); track category.slug) {
+                  <option [value]="category.slug">{{ category['name'] }}</option>
+                }
+              </select>
+            </label>
+          } @else {
+            <label class="field">
+              {{ field.label }}
+              <input
+                [type]="field.type"
+                [name]="field.key"
+                [(ngModel)]="draft[field.key]"
+                [required]="field.required ?? false"
+                [min]="field.min ?? null"
+                [max]="field.max ?? null">
+            </label>
+          }
+        }
+
+        <button class="primary-button save-button" type="submit" [disabled]="saving()">
+          {{ saving() ? 'Đang lưu...' : (editingSlug() ? 'Lưu thay đổi' : 'Tạo nội dung') }}
+        </button>
+      </form>
+    </div>
+    }
+  }
+</section>

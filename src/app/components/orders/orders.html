@@ -1,0 +1,57 @@
+<section class="orders-page">
+  <div class="orders-heading">
+    <div>
+      <a routerLink="/" class="back-link">← Về trang chủ</a>
+      <h1>Đơn hàng của tôi</h1>
+    </div>
+    <a routerLink="/products" class="continue-link">Tiếp tục mua sắm</a>
+  </div>
+
+  @if (loading()) {
+    <p class="orders-message">Đang tải đơn hàng...</p>
+  } @else if (loginRequired()) {
+    <div class="orders-message">
+      <p>Bạn cần đăng nhập để xem đơn hàng.</p>
+      <a routerLink="/account" [queryParams]="{ returnUrl: '/orders' }">Đăng nhập</a>
+    </div>
+  } @else if (error()) {
+    <p class="orders-message error" role="alert">{{ error() }}</p>
+  } @else if (orders().length === 0) {
+    <div class="orders-message">
+      <p>Bạn chưa có đơn hàng nào.</p>
+      <a routerLink="/products">Khám phá sản phẩm</a>
+    </div>
+  } @else {
+    <div class="orders-list">
+      @for (order of orders(); track order.id) {
+        <article class="order-card">
+          <header class="order-header">
+            <div>
+              <strong>Đơn #{{ order.id.slice(0, 8) }}</strong>
+              <small>{{ formatDate(order.createdAt) }}</small>
+            </div>
+            <span class="order-status">{{ statusLabel(order.status) }}</span>
+          </header>
+          <div class="order-items">
+            @for (item of order.items; track item.productSlug) {
+              <div class="order-item">
+                <img [src]="item.image" [alt]="item.name">
+                <div>
+                  <strong>{{ item.name }}</strong>
+                  <small>{{ item.quantity }} × {{ formatPrice(item.unitPrice) }}</small>
+                </div>
+                <b>{{ formatPrice(item.lineTotal) }}</b>
+              </div>
+            }
+          </div>
+          <p class="delivery">Người nhận: {{ order.customer.name }} · {{ order.customer.phone }}</p>
+          <p class="delivery">Địa chỉ: {{ order.customer.address }}</p>
+          <footer class="order-total">
+            <span>Tổng cộng · COD</span>
+            <strong>{{ formatPrice(order.total) }}</strong>
+          </footer>
+        </article>
+      }
+    </div>
+  }
+</section>

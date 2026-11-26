@@ -1,0 +1,60 @@
+<header class="header">
+  <div class="header-top">
+    <a routerLink="/" class="logo">
+      🏎️ BH<span>Garage</span>
+    </a>
+    <a
+      routerLink="/cart"
+      class="cart"
+      [attr.aria-label]="'Giỏ hàng, ' + cart.itemCount() + ' sản phẩm'">
+      🛒
+      @if (cart.itemCount() > 0) {
+        <span class="cart-count">{{ cart.itemCount() }}</span>
+      }
+    </a>
+    <a routerLink="/account" class="account-link" aria-label="Đăng nhập hoặc đăng ký">👤</a>
+  </div>
+
+  <form class="search" (ngSubmit)="search()">
+    <input
+      type="search"
+      name="search"
+      [(ngModel)]="searchTerm"
+      placeholder="Tìm mô hình siêu xe bạn yêu thích..."
+      aria-label="Tìm sản phẩm theo tên">
+    <button type="submit">Tìm</button>
+  </form>
+</header>
+
+<nav class="nav">
+  <a
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
+    Trang chủ
+  </a>
+
+  <a
+    routerLink="/products"
+    routerLinkActive="active">
+    Sản phẩm
+  </a>
+
+  <a
+    routerLink="/promotions"
+    routerLinkActive="active">
+    Khuyến mãi
+  </a>
+
+  <a
+    routerLink="/bai_viet"
+    routerLinkActive="active">
+    Bài viết
+  </a>
+  <a
+    routerLink="/orders"
+    routerLinkActive="active">
+    Đơn hàng
+  </a>
+
+</nav>

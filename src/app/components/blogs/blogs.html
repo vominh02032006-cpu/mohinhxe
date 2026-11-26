@@ -1,0 +1,28 @@
+<div class="breadcrumb">
+  <a routerLink="/">Trang chủ</a> &gt; <span>Bài viết</span>
+</div>
+
+<section class="blogs-page">
+  <h1>Bài viết về mô hình xe</h1>
+  <p>Kiến thức và kinh nghiệm dành cho người yêu thích sưu tầm.</p>
+  @if (error()) {
+    <p class="form-status" role="alert">{{ error() }}</p>
+  }
+  <div class="blog-list">
+    @for (blog of blogs(); track blog.slug) {
+      <article class="blog-card">
+        <img [src]="blog.image" [alt]="blog.title">
+        <div>
+          <span>{{ blog.category }}</span>
+          <h2>{{ blog.title }}</h2>
+          <p>{{ blog.summary }}</p>
+          <time [attr.datetime]="blog.publishedAt">{{ blog.publishedAt | date:'mediumDate' }}</time>
+        </div>
+      </article>
+    } @empty {
+      @if (!error()) {
+        <p>Chưa có bài viết.</p>
+      }
+    }
+  </div>
+</section>

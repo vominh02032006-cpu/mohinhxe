@@ -1,0 +1,73 @@
+<section class="account-page">
+  <a routerLink="/" class="back-link">← Về trang chủ</a>
+
+  @if (checking()) {
+    <div class="account-card">Đang kiểm tra tài khoản...</div>
+  } @else if (user()) {
+    <div class="account-card">
+      <p class="eyebrow">TÀI KHOẢN BH GARAGE</p>
+      <h1>Xin chào, {{ user()?.name }}</h1>
+      <p class="account-email">{{ user()?.email }}</p>
+      <p>Xem trạng thái và lịch sử các đơn hàng của bạn.</p>
+      @if (error()) {
+        <p class="message error" role="alert">{{ error() }}</p>
+      }
+      <a routerLink="/orders" class="primary-button">Xem đơn hàng của tôi</a>
+      <button class="text-button" type="button" (click)="logout()">Đăng xuất</button>
+    </div>
+  } @else {
+    <form class="account-card" (ngSubmit)="submit()">
+      <p class="eyebrow">BH GARAGE</p>
+      <h1>{{ mode() === 'login' ? 'Đăng nhập' : 'Tạo tài khoản' }}</h1>
+      <p class="intro">Đăng nhập để đặt hàng và theo dõi đơn hàng của bạn.</p>
+
+      @if (error()) {
+        <p class="message error" role="alert">{{ error() }}</p>
+      }
+
+      @if (mode() === 'register') {
+        <label>
+          Họ và tên
+          <input
+            type="text"
+            name="name"
+            [(ngModel)]="name"
+            minlength="2"
+            maxlength="80"
+            autocomplete="name"
+            required>
+        </label>
+      }
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          maxlength="254"
+          autocomplete="email"
+          required>
+      </label>
+      <label>
+        Mật khẩu
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          minlength="8"
+          maxlength="128"
+          [autocomplete]="mode() === 'login' ? 'current-password' : 'new-password'"
+          required>
+      </label>
+      <button class="primary-button submit-button" type="submit" [disabled]="pending()">
+        {{ pending() ? 'Đang xử lý...' : (mode() === 'login' ? 'Đăng nhập' : 'Đăng ký') }}
+      </button>
+      <button
+        class="text-button"
+        type="button"
+        (click)="setMode(mode() === 'login' ? 'register' : 'login')">
+        {{ mode() === 'login' ? 'Chưa có tài khoản? Đăng ký' : 'Đã có tài khoản? Đăng nhập' }}
+      </button>
+    </form>
+  }
+</section>

@@ -1,0 +1,46 @@
+<div class="breadcrumb">
+  <a routerLink="/">Trang chủ</a> &gt; <a routerLink="/products">Sản phẩm</a> &gt;
+  <span>{{ category()?.name || 'Danh mục' }}</span>
+</div>
+
+<section class="category-page">
+  <h1>{{ category()?.name || 'Danh mục sản phẩm' }}</h1>
+  <p>{{ category()?.description }}</p>
+  <div class="category-scroll" aria-label="Chọn danh mục sản phẩm">
+    <a
+      routerLink="/products"
+      class="category-item"
+      [class.active]="!category()">
+      Tất cả
+    </a>
+    @for (item of categories(); track item.slug) {
+      <a
+        [routerLink]="['/category', item.slug]"
+        class="category-item"
+        [class.active]="category()?.slug === item.slug">
+        {{ item.name }}
+      </a>
+    }
+  </div>
+  @if (error()) {
+    <p class="form-status" role="alert">{{ error() }}</p>
+  }
+  <div class="product-grid">
+    @for (product of products(); track product.slug) {
+      <article class="product-card">
+        <a [routerLink]="['/product', product.slug]" class="product-image">
+          <img [src]="product.image" [alt]="product.name">
+        </a>
+        <div class="product-info">
+          <h2 class="product-name">{{ product.name }}</h2>
+          <div class="price">{{ product.price }}</div>
+          <a [routerLink]="['/product', product.slug]" class="btn-detail">Chi tiết</a>
+        </div>
+      </article>
+    } @empty {
+      @if (!error()) {
+        <p>Danh mục hiện chưa có sản phẩm.</p>
+      }
+    }
+  </div>
+</section>

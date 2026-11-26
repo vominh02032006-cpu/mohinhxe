@@ -1,0 +1,101 @@
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a routerLink="/">Trang chủ</a> &gt; <span>Sản phẩm</span>
+</div>
+
+<section class="page-heading">
+  <h1>Khám phá mô hình siêu xe 🏎️</h1>
+  <p>Sưu tầm những mẫu xe thể thao và siêu xe thu nhỏ đầy ấn tượng.</p>
+</section>
+
+<section class="category-section">
+  <h2 class="category-title">Danh mục mô hình</h2>
+  <div class="category-scroll">
+    <a routerLink="/products" class="category-item active">🏁 Tất cả</a>
+    @for (category of categories(); track category.slug) {
+      <a [routerLink]="['/category', category.slug]" class="category-item">{{ category.name }}</a>
+    }
+  </div>
+</section>
+
+<section class="filter-section">
+  <div class="filter-title">Sắp xếp theo</div>
+  <div class="filter-options">
+    <div class="filter-option">
+      <input
+        type="radio"
+        id="newest"
+        name="sort"
+        [checked]="sortMode() === 'newest'"
+        (change)="setSort('newest')">
+      <label for="newest">✨ Mới nhất</label>
+    </div>
+    <div class="filter-option">
+      <input
+        type="radio"
+        id="bestseller"
+        name="sort"
+        [checked]="sortMode() === 'bestseller'"
+        (change)="setSort('bestseller')">
+      <label for="bestseller">🔥 Bán chạy</label>
+    </div>
+    <div class="filter-option">
+      <input
+        type="radio"
+        id="promotion"
+        name="sort"
+        [checked]="sortMode() === 'discount'"
+        (change)="setSort('discount')">
+      <label for="promotion">🏷️ Giảm giá</label>
+    </div>
+  </div>
+</section>
+
+<section class="products-section">
+  <div class="products-heading">
+    <h2>
+      @if (searchQuery()) {
+        Kết quả tìm kiếm: “{{ searchQuery() }}”
+      } @else {
+        Mô hình xe mới nhất
+      }
+    </h2>
+    <span class="product-count">Hiển thị {{ products().length }} mẫu xe</span>
+  </div>
+
+  @if (error()) {
+    <p class="form-status" role="alert">{{ error() }}</p>
+  }
+
+  <div class="product-grid">
+    @for (product of sortedProducts(); track product.slug) {
+    <article class="product-card">
+      <div class="product-image">
+        <img [src]="product.image" [alt]="product.name">
+        @if (product.discount > 0) {
+        <span class="label label-sale">-{{ product.discount }}%</span>
+        } @else {
+        <span class="label label-new">NEW</span>
+        }
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <div class="price">{{ product.price }}</div>
+        <div class="old-price">{{ product.oldPrice }}</div>
+        <div class="product-actions">
+          <a routerLink="/cart" class="btn-buy" (click)="cart.add(product)">🛒 Mua</a>
+          <a [routerLink]="['/product', product.slug]" class="btn-detail">Chi tiết</a>
+        </div>
+      </div>
+    </article>
+    } @empty {
+      <p class="empty-state">Không tìm thấy sản phẩm phù hợp.</p>
+    }
+  </div>
+</section>
+
+<aside class="promo-banner">
+  <h3>🏁 Tăng tốc bộ sưu tập của bạn!</h3>
+  <p>Chọn mẫu xe yêu thích và đưa về garage ngay hôm nay.</p>
+  <a routerLink="/products">Khám phá mô hình →</a>
+</aside>

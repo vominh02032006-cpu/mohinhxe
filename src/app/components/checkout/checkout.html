@@ -1,0 +1,86 @@
+<section class="checkout-page">
+  <a routerLink="/cart" class="back-link">← Quay lại giỏ hàng</a>
+  <h1>Thông tin đặt hàng</h1>
+
+  @if (checkingAccount()) {
+    <p class="checkout-message">Đang kiểm tra đăng nhập...</p>
+  } @else if (!authenticated()) {
+    <div class="checkout-message">
+      <p>Đăng nhập hoặc đăng ký để tiếp tục đặt hàng.</p>
+      <a routerLink="/account" [queryParams]="{ returnUrl: '/checkout' }">Đăng nhập / Đăng ký</a>
+    </div>
+  } @else if (cart.items().length === 0) {
+    <div class="checkout-message">
+      <p>Giỏ hàng đang trống.</p>
+      <a routerLink="/products">Khám phá sản phẩm</a>
+    </div>
+  } @else {
+    @if (error()) {
+      <p class="checkout-error" role="alert">{{ error() }}</p>
+    }
+    <div class="checkout-grid">
+      <form class="checkout-card" (ngSubmit)="placeOrder()">
+        <h2>Thông tin nhận hàng</h2>
+        <label>
+          Họ tên người nhận
+          <input
+            type="text"
+            name="name"
+            [(ngModel)]="name"
+            minlength="2"
+            maxlength="80"
+            autocomplete="name"
+            required>
+        </label>
+        <label>
+          Số điện thoại
+          <input
+            type="tel"
+            name="phone"
+            [(ngModel)]="phone"
+            minlength="8"
+            maxlength="20"
+            autocomplete="tel"
+            required>
+        </label>
+        <label>
+          Địa chỉ giao hàng
+          <textarea
+            name="address"
+            [(ngModel)]="address"
+            minlength="5"
+            maxlength="300"
+            autocomplete="street-address"
+            rows="3"
+            required></textarea>
+        </label>
+        <label>
+          Ghi chú (không bắt buộc)
+          <textarea name="note" [(ngModel)]="note" maxlength="500" rows="2"></textarea>
+        </label>
+        <div class="payment-method">
+          <strong>Thanh toán khi nhận hàng (COD)</strong>
+          <span>Bạn thanh toán trực tiếp khi nhận được đơn.</span>
+        </div>
+        <button class="place-order-button" type="submit" [disabled]="pending()">
+          {{ pending() ? 'Đang tạo đơn...' : 'Xác nhận đặt hàng' }}
+        </button>
+      </form>
+
+      <aside class="checkout-card order-summary">
+        <h2>Đơn hàng</h2>
+        @for (item of cart.items(); track item.product.slug) {
+          <div class="summary-item">
+            <span>{{ item.product.name }} × {{ item.quantity }}</span>
+            <strong>{{ formatPrice(cart.itemTotal(item)) }}</strong>
+          </div>
+        }
+        <div class="summary-total">
+          <span>Tổng cộng</span>
+          <strong>{{ formatPrice(cart.subtotal()) }}</strong>
+        </div>
+        <p>Giá cuối cùng được máy chủ kiểm tra từ dữ liệu sản phẩm.</p>
+      </aside>
+    </div>
+  }
+</section>

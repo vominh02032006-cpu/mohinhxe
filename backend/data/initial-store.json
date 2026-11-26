@@ -1,0 +1,212 @@
+{
+  "categories": [
+    {
+      "id": "category-sieu-xe",
+      "name": "Siêu xe",
+      "slug": "sieu-xe",
+      "description": "Các mẫu mô hình siêu xe.",
+      "image": "",
+      "createdAt": "2026-11-14T00:00:00.000Z",
+      "updatedAt": "2026-11-14T00:00:00.000Z"
+    },
+    {
+      "id": "category-xe-dua",
+      "name": "Xe đua",
+      "slug": "xe-dua",
+      "description": "Mô hình xe đua thể thao.",
+      "image": "",
+      "createdAt": "2026-11-13T00:00:00.000Z",
+      "updatedAt": "2026-11-13T00:00:00.000Z"
+    },
+    {
+      "id": "category-xe-the-thao",
+      "name": "Xe thể thao",
+      "slug": "xe-the-thao",
+      "description": "Các mẫu xe thể thao sưu tầm.",
+      "image": "",
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "product-porsche-911-carrera-s-ti-le-1-24",
+      "name": "Porsche 911 Carrera S - Tỉ lệ 1:24",
+      "slug": "porsche-911-carrera-s-ti-le-1-24",
+      "price": "850.000đ",
+      "oldPrice": "-",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Porsche_911_Carrera_model_car.jpg/500px-Porsche_911_Carrera_model_car.jpg",
+      "description": "Mô hình Porsche 911 Carrera S tỉ lệ 1:24.",
+      "discount": 0,
+      "sold": 120,
+      "category": "xe-the-thao",
+      "createdAt": "2026-11-01T00:00:00.000Z",
+      "updatedAt": "2026-11-01T00:00:00.000Z"
+    },
+    {
+      "id": "product-porsche-959-mo-hinh-ti-le-1-18",
+      "name": "Porsche 959 - Mô hình tỉ lệ 1:18",
+      "slug": "porsche-959-mo-hinh-ti-le-1-18",
+      "price": "920.000đ",
+      "oldPrice": "-",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Porsche_959_scale_model.jpg/500px-Porsche_959_scale_model.jpg",
+      "description": "Mô hình Porsche 959 tỉ lệ 1:18.",
+      "discount": 0,
+      "sold": 85,
+      "category": "sieu-xe",
+      "createdAt": "2026-11-02T00:00:00.000Z",
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "product-ferrari-f2012-mo-hinh-xe-dua-ti-le-1-18",
+      "name": "Ferrari F2012 - Mô hình xe đua tỉ lệ 1:18",
+      "slug": "ferrari-f2012-mo-hinh-xe-dua-ti-le-1-18",
+      "price": "1.050.000đ",
+      "oldPrice": "-",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Diecast_Ferrari_2012.jpg/500px-Diecast_Ferrari_2012.jpg",
+      "description": "Mô hình xe đua Ferrari F2012 tỉ lệ 1:18.",
+      "discount": 0,
+      "sold": 310,
+      "category": "xe-dua",
+      "createdAt": "2026-11-03T00:00:00.000Z",
+      "updatedAt": "2026-11-03T00:00:00.000Z"
+    },
+    {
+      "id": "product-ferrari-sf15-t-vettel-mo-hinh-bburago",
+      "name": "Ferrari SF15-T Vettel - Mô hình Bburago",
+      "slug": "ferrari-sf15-t-vettel-mo-hinh-bburago",
+      "price": "980.000đ",
+      "oldPrice": "-",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Bburago_SF15T_Vettel.jpg/500px-Bburago_SF15T_Vettel.jpg",
+      "description": "Mô hình xe đua Ferrari SF15-T Vettel.",
+      "discount": 0,
+      "sold": 45,
+      "category": "xe-dua",
+      "createdAt": "2026-11-04T00:00:00.000Z",
+      "updatedAt": "2026-11-04T00:00:00.000Z"
+    },
+    {
+      "id": "product-porsche-550-a-spyder-mo-hinh-maisto-1-18",
+      "name": "Porsche 550 A Spyder - Mô hình Maisto 1:18",
+      "slug": "porsche-550-a-spyder-mo-hinh-maisto-1-18",
+      "price": "2.400.000đ",
+      "oldPrice": "2.800.000đ",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Porsche_550_A_Maisto_1-18_%28vorn%29.JPG/500px-Porsche_550_A_Maisto_1-18_%28vorn%29.JPG",
+      "description": "Mô hình Porsche 550 A Spyder tỉ lệ 1:18.",
+      "discount": 20,
+      "sold": 520,
+      "category": "xe-the-thao",
+      "createdAt": "2026-11-05T00:00:00.000Z",
+      "updatedAt": "2026-11-05T00:00:00.000Z"
+    },
+    {
+      "id": "product-porsche-904-gts-mo-hinh-minichamps-1-18",
+      "name": "Porsche 904 GTS - Mô hình Minichamps 1:18",
+      "slug": "porsche-904-gts-mo-hinh-minichamps-1-18",
+      "price": "890.000đ",
+      "oldPrice": "1.050.000đ",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/Porsche_904_GTS_Minichamps_1-18.JPG/500px-Porsche_904_GTS_Minichamps_1-18.JPG",
+      "description": "Mô hình Porsche 904 GTS tỉ lệ 1:18.",
+      "discount": 25,
+      "sold": 260,
+      "category": "xe-the-thao",
+      "createdAt": "2026-11-06T00:00:00.000Z",
+      "updatedAt": "2026-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "product-nissan-skyline-gt-r-r34-mo-hinh-inno64-1-64",
+      "name": "Nissan Skyline GT-R R34 - Mô hình INNO64 1:64",
+      "slug": "nissan-skyline-gt-r-r34-mo-hinh-inno64-1-64",
+      "price": "820.000đ",
+      "oldPrice": "1.000.000đ",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/INNO64_Nissan_Skyline_GT-R_R34_Millenium_Jade.jpg/500px-INNO64_Nissan_Skyline_GT-R_R34_Millenium_Jade.jpg",
+      "description": "Mô hình Nissan Skyline GT-R R34 tỉ lệ 1:64.",
+      "discount": 15,
+      "sold": 180,
+      "category": "sieu-xe",
+      "createdAt": "2026-11-07T00:00:00.000Z",
+      "updatedAt": "2026-11-07T00:00:00.000Z"
+    },
+    {
+      "id": "product-ferrari-formula-1-mo-hinh-die-cast",
+      "name": "Ferrari Formula 1 - Mô hình die-cast",
+      "slug": "ferrari-formula-1-mo-hinh-die-cast",
+      "price": "1.750.000đ",
+      "oldPrice": "2.100.000đ",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Carro_de_F%C3%B3rmula_1_de_la_escuder%C3%ADa_Ferrari%2C_Diecast_Convention%2C_Mexico_2017.jpg/500px-Carro_de_F%C3%B3rmula_1_de_la_escuder%C3%ADa_Ferrari%2C_Diecast_Convention%2C_Mexico_2017.jpg",
+      "description": "Mô hình xe đua Ferrari Formula 1.",
+      "discount": 30,
+      "sold": 410,
+      "category": "xe-dua",
+      "createdAt": "2026-11-08T00:00:00.000Z",
+      "updatedAt": "2026-11-08T00:00:00.000Z"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "blog-cach-bao-quan-mo-hinh-xe-suu-tam-luon-nhu-moi",
+      "title": "Cách bảo quản mô hình xe sưu tầm luôn như mới",
+      "slug": "cach-bao-quan-mo-hinh-xe-suu-tam-luon-nhu-moi",
+      "summary": "Mẹo vệ sinh, trưng bày và giữ màu sơn cho bộ sưu tập xe của bạn.",
+      "content": "Vệ sinh nhẹ nhàng và tránh ánh nắng trực tiếp giúp mô hình bền đẹp hơn.",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/INNO64_Nissan_Skyline_GT-R_R34_Millenium_Jade.jpg/500px-INNO64_Nissan_Skyline_GT-R_R34_Millenium_Jade.jpg",
+      "category": "Góc sưu tầm",
+      "publishedAt": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "blog-cac-ti-le-mo-hinh-xe-pho-bien",
+      "title": "Các tỉ lệ mô hình xe phổ biến",
+      "slug": "cac-ti-le-mo-hinh-xe-pho-bien",
+      "summary": "So sánh tỉ lệ 1:18, 1:24 và 1:64 để chọn mẫu phù hợp.",
+      "content": "Hãy cân nhắc diện tích trưng bày và mức độ chi tiết khi chọn tỉ lệ.",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Bburago_SF15T_Vettel.jpg/500px-Bburago_SF15T_Vettel.jpg",
+      "category": "Kiến thức mô hình",
+      "publishedAt": "2026-11-09T00:00:00.000Z"
+    },
+    {
+      "id": "blog-sieu-xe-nao-phu-hop-de-bat-dau-suu-tam",
+      "title": "Siêu xe nào phù hợp để bắt đầu sưu tầm?",
+      "slug": "sieu-xe-nao-phu-hop-de-bat-dau-suu-tam",
+      "summary": "Gợi ý những mẫu xe biểu tượng dành cho người mới.",
+      "content": "Người mới có thể bắt đầu từ mẫu xe yêu thích và một tỉ lệ phù hợp.",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Diecast_Ferrari_2012.jpg/500px-Diecast_Ferrari_2012.jpg",
+      "category": "Gợi ý sưu tầm",
+      "publishedAt": "2026-11-08T00:00:00.000Z"
+    }
+  ],
+  "banners": [
+    {
+      "id": "banner-dam-me-sieu-xe-thu-nho-trong-tam-tay",
+      "title": "Đam mê siêu xe, thu nhỏ trong tầm tay",
+      "slug": "dam-me-sieu-xe-thu-nho-trong-tam-tay",
+      "description": "Mô hình sưu tầm chính hãng, ưu đãi đến 30%",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Porsche_911_Carrera_model_car.jpg/500px-Porsche_911_Carrera_model_car.jpg",
+      "link": "/products",
+      "isActive": true,
+      "createdAt": "2026-11-14T00:00:00.000Z",
+      "updatedAt": "2026-11-14T00:00:00.000Z"
+    },
+    {
+      "id": "banner-dua-huyen-thoai-toc-do-ve-garage",
+      "title": "Đưa huyền thoại tốc độ về garage",
+      "slug": "dua-huyen-thoai-toc-do-ve-garage",
+      "description": "Ưu đãi đặc biệt cho tín đồ sưu tầm",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Diecast_Ferrari_2012.jpg/500px-Diecast_Ferrari_2012.jpg",
+      "link": "/promotions",
+      "isActive": true,
+      "createdAt": "2026-11-13T00:00:00.000Z",
+      "updatedAt": "2026-11-13T00:00:00.000Z"
+    },
+    {
+      "id": "banner-dong-goi-mo-hinh-an-toan",
+      "title": "Đóng gói mô hình an toàn",
+      "slug": "dong-goi-mo-hinh-an-toan",
+      "description": "Giao hàng tận nơi, bảo vệ hộp xe nguyên vẹn",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Bburago_SF15T_Vettel.jpg/500px-Bburago_SF15T_Vettel.jpg",
+      "link": "/products",
+      "isActive": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    }
+  ]
+}
